@@ -1,0 +1,50 @@
+package org.firstinspires.ftc.teamcode.auton.ops;//package org.firstinspires.ftc.teamcode.auton.ops;
+
+import com.arcrobotics.ftclib.command.CommandOpMode;
+import com.arcrobotics.ftclib.command.InstantCommand;
+import com.arcrobotics.ftclib.command.ParallelCommandGroup;
+import com.arcrobotics.ftclib.command.WaitCommand;
+import com.arcrobotics.ftclib.command.WaitUntilCommand;
+import com.arcrobotics.ftclib.hardware.motors.Motor;
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
+
+@Autonomous(name = "ParkingAuton")
+public class DriveForwardAuton extends CommandOpMode {
+
+    private Motor fL, bL, fR, bR;
+
+    @Override
+    public void initialize() {
+
+        fL = new Motor(hardwareMap, "fL");
+        fR = new Motor(hardwareMap, "fR");
+        bL = new Motor(hardwareMap, "bL");
+        bR = new Motor(hardwareMap, "bR");
+
+        bR.motor.setDirection(DcMotor.Direction.REVERSE);
+        bL.motor.setDirection(DcMotor.Direction.REVERSE);
+
+        schedule(
+            new WaitUntilCommand(this::isStarted)
+                .andThen(new ParallelCommandGroup(
+                    new InstantCommand(() -> fL.set(-0.3)),
+                    new InstantCommand(() -> bL.set(0.3)),
+                    new InstantCommand(() -> fR.set(0.3)),
+                    new InstantCommand(() -> bR.set(-0.3))
+                )).andThen(
+                    new WaitCommand(500))
+                .andThen(new ParallelCommandGroup(
+                    new InstantCommand(() -> fL.stopMotor()),
+                    new InstantCommand(() -> bL.stopMotor()) ,
+                    new InstantCommand(() -> fR.stopMotor()),
+                    new InstantCommand(() -> bR.stopMotor())
+                    )
+                )
+            );
+
+
+
+    }
+}
