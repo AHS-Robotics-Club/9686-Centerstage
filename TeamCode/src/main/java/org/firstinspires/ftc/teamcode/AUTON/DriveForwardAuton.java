@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.auton.ops;//package org.firstinspires.ftc.teamcode.auton.ops;
+package org.firstinspires.ftc.teamcode.AUTON;//package org.firstinspires.ftc.teamcode.auton.ops;
 
 import com.arcrobotics.ftclib.command.CommandOpMode;
 import com.arcrobotics.ftclib.command.InstantCommand;
@@ -34,7 +34,7 @@ public class DriveForwardAuton extends CommandOpMode {
                     new InstantCommand(() -> fR.set(0.3)),
                     new InstantCommand(() -> bR.set(-0.3))
                 )).andThen(
-                    new WaitCommand(500))
+                    new WaitCommand(1700))
                 .andThen(new ParallelCommandGroup(
                     new InstantCommand(() -> fL.stopMotor()),
                     new InstantCommand(() -> bL.stopMotor()) ,
@@ -42,9 +42,21 @@ public class DriveForwardAuton extends CommandOpMode {
                     new InstantCommand(() -> bR.stopMotor())
                     )
                 )
-            );
-
-
-
+                    .andThen(new ParallelCommandGroup(
+                            new InstantCommand(() -> fL.set(0.3)),
+                            new InstantCommand(() -> bL.set(-0.3)),
+                            new InstantCommand(() -> fR.set(-0.3)),
+                            new InstantCommand(() -> bR.set(0.3))
+                    )).andThen(
+                            new WaitCommand(500))
+                .andThen(new ParallelCommandGroup(
+                        new InstantCommand(() -> fL.stopMotor()),
+                        new InstantCommand(() -> bL.stopMotor()) ,
+                        new InstantCommand(() -> fR.stopMotor()),
+                        new InstantCommand(() -> bR.stopMotor())
+                )
+        ));
     }
 }
+
+
