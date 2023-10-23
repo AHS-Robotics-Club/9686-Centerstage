@@ -57,6 +57,12 @@ public class Meet1TeleOp extends CommandOpMode {
         backLeft.motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         backRight.motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
+
+
+        actuator.motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
+
+
         system = new TestSubsystem(frontLeft, frontRight, backLeft, backRight);
         command = new TestCommand(system, gPad1::getLeftX, gPad1::getLeftY, gPad1::getRightX);
 
