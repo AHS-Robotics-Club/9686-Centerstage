@@ -27,6 +27,8 @@ public class Meet1TeleOp extends CommandOpMode {
 
     private SimpleServo airServo;
 
+    private SimpleServo intakeServo;
+
     private TestSubsystem system;
 
     private TestCommand command;
@@ -51,6 +53,7 @@ public class Meet1TeleOp extends CommandOpMode {
 
 
         airServo = new SimpleServo(hardwareMap, "air",-180,180);
+        intakeServo = new SimpleServo(hardwareMap, "intakeServo",-180,180);
 
         gPad1 = new GamepadEx(gamepad1);
 
@@ -64,6 +67,7 @@ public class Meet1TeleOp extends CommandOpMode {
 
 
         bar.setZeroPowerBehavior(Motor.ZeroPowerBehavior.BRAKE);
+        intake.setZeroPowerBehavior(Motor.ZeroPowerBehavior.BRAKE);
 
 
         frontLeft.motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
@@ -98,6 +102,14 @@ public class Meet1TeleOp extends CommandOpMode {
                         new InstantCommand(() -> airServo.setPosition(0))
                                 .andThen(new InstantCommand(() -> airServo.setPosition(1))));
 
+        gPad1.getGamepadButton(GamepadKeys.Button.DPAD_RIGHT).whenPressed
+                (
+                        new InstantCommand(() -> airServo.setPosition(0)));
+
+        gPad1.getGamepadButton(GamepadKeys.Button.DPAD_LEFT).whenPressed
+                (
+                        new InstantCommand(() -> airServo.setPosition(1)));
+
         register(system);
         system.setDefaultCommand(command);
 
@@ -106,7 +118,6 @@ public class Meet1TeleOp extends CommandOpMode {
             telemetry.update();
         }));
     }
-
 }
 
 
