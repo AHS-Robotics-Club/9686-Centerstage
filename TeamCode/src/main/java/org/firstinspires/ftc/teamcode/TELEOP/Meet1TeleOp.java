@@ -21,6 +21,10 @@ public class Meet1TeleOp extends CommandOpMode {
 
     private Motor actuator;
 
+    private Motor bar;
+
+    private Motor intake;
+
     private SimpleServo airServo;
 
     private TestSubsystem system;
@@ -41,15 +45,25 @@ public class Meet1TeleOp extends CommandOpMode {
 
         actuator = new Motor(hardwareMap, "act");
 
+        bar = new Motor(hardwareMap, "bar");
+
+        intake = new Motor(hardwareMap, "intake");
+
+
         airServo = new SimpleServo(hardwareMap, "air",-180,180);
 
         gPad1 = new GamepadEx(gamepad1);
+
+        frontRight.motor.setDirection(DcMotor.Direction.REVERSE);
 
 
         frontLeft.setZeroPowerBehavior(Motor.ZeroPowerBehavior.BRAKE);
         frontRight.setZeroPowerBehavior(Motor.ZeroPowerBehavior.BRAKE);
         backLeft.setZeroPowerBehavior(Motor.ZeroPowerBehavior.BRAKE);
         backRight.setZeroPowerBehavior(Motor.ZeroPowerBehavior.BRAKE);
+
+
+        bar.setZeroPowerBehavior(Motor.ZeroPowerBehavior.BRAKE);
 
 
         frontLeft.motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
@@ -60,6 +74,8 @@ public class Meet1TeleOp extends CommandOpMode {
 
 
         actuator.motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        bar.motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        intake.motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
 
 
@@ -67,8 +83,15 @@ public class Meet1TeleOp extends CommandOpMode {
         command = new TestCommand(system, gPad1::getLeftX, gPad1::getLeftY, gPad1::getRightX);
 
 
-        gPad1.getGamepadButton(GamepadKeys.Button.RIGHT_BUMPER).whenHeld(new StartEndCommand(() -> actuator.set(1), () -> actuator.stopMotor()));
-        gPad1.getGamepadButton(GamepadKeys.Button.LEFT_BUMPER).whenHeld(new StartEndCommand(() -> actuator.set(-1), () -> actuator.stopMotor()));
+        gPad1.getGamepadButton(GamepadKeys.Button.DPAD_UP).whenHeld(new StartEndCommand(() -> actuator.set(1), () -> actuator.stopMotor()));
+        gPad1.getGamepadButton(GamepadKeys.Button.DPAD_DOWN).whenHeld(new StartEndCommand(() -> actuator.set(-1), () -> actuator.stopMotor()));
+
+        gPad1.getGamepadButton(GamepadKeys.Button.RIGHT_BUMPER).whenHeld(new StartEndCommand(() -> bar.set(0.35), () -> bar.stopMotor()));
+        gPad1.getGamepadButton(GamepadKeys.Button.LEFT_BUMPER).whenHeld(new StartEndCommand(() -> bar.set(-0.35), () -> bar.stopMotor()));
+
+        gPad1.getGamepadButton(GamepadKeys.Button.A).whenHeld(new StartEndCommand(() -> intake.set(1), () -> intake.stopMotor()));
+        gPad1.getGamepadButton(GamepadKeys.Button.X).whenHeld(new StartEndCommand(() -> intake.set(-1), () -> intake.stopMotor()));
+
 
         gPad1.getGamepadButton(GamepadKeys.Button.B).whenPressed
                 (
@@ -85,3 +108,5 @@ public class Meet1TeleOp extends CommandOpMode {
     }
 
 }
+
+

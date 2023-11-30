@@ -8,36 +8,36 @@ import com.arcrobotics.ftclib.command.WaitCommand;
 import com.arcrobotics.ftclib.gamepad.GamepadEx;
 import com.arcrobotics.ftclib.gamepad.GamepadKeys;
 import com.arcrobotics.ftclib.hardware.SimpleServo;
+import com.arcrobotics.ftclib.hardware.motors.Motor;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.R;
 
-@TeleOp(name = "ServoTest")
-public class ServoTest extends CommandOpMode {
-    private SimpleServo airServo;
+@TeleOp(name = "MotorTest")
+public class MotorTest extends CommandOpMode {
 
+    private Motor test;
     private GamepadEx gPad1;
 
     @Override
     public void initialize() {
-        airServo = new SimpleServo(hardwareMap, "air",-180,180);
+
+
+        test = new Motor(hardwareMap, "test");
+
         gPad1 = new GamepadEx(gamepad1);
 
-//       gPad1.getGamepadButton(GamepadKeys.Button.B).whenPressed
-//                 (
-//                        new InstantCommand(() -> airServo.setPosition(0))
-//                        .andThen(new InstantCommand(() -> airServo.setPosition(1))));
-
-
-        gPad1.getGamepadButton(GamepadKeys.Button.B).whenPressed(new InstantCommand(() -> airServo.setPosition(1)).andThen(new WaitCommand(1000))
-      .andThen(new InstantCommand(() -> airServo.setPosition(0.4))));
 
 
 
-        schedule(new RunCommand(() -> {
-            telemetry.addData("AirplaneSERVOANLE", airServo.getAngle());
-            telemetry.update();
-        }));
+
+
+        gPad1.getGamepadButton(GamepadKeys.Button.RIGHT_BUMPER).whenHeld(new StartEndCommand(() -> test.set(0.35), () -> test.stopMotor()));
+        gPad1.getGamepadButton(GamepadKeys.Button.LEFT_BUMPER).whenHeld(new StartEndCommand(() -> test.set(-0.35), () -> test.stopMotor()));
+
+        test.setZeroPowerBehavior(Motor.ZeroPowerBehavior.BRAKE);
+
+
     }
 }
 

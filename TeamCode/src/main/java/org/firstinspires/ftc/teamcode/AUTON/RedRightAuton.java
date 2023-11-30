@@ -31,10 +31,10 @@ public class RedRightAuton extends CommandOpMode {
                         .andThen(new ParallelCommandGroup(
                                 new InstantCommand(() -> fL.set(-0.3)),
                                 new InstantCommand(() -> bL.set(0.3)),
-                                new InstantCommand(() -> fR.set(0.3)),
+                                new InstantCommand(() -> fR.set(-0.3)),
                                 new InstantCommand(() -> bR.set(-0.3))
                         )).andThen(
-                                new WaitCommand(2000))
+                                new WaitCommand(1700))
                         .andThen(new ParallelCommandGroup(
                                         new InstantCommand(() -> fL.stopMotor()),
                                         new InstantCommand(() -> bL.stopMotor()) ,
@@ -45,7 +45,7 @@ public class RedRightAuton extends CommandOpMode {
                         .andThen(new ParallelCommandGroup(
                                 new InstantCommand(() -> fL.set(0.3)),
                                 new InstantCommand(() -> bL.set(-0.3)),
-                                new InstantCommand(() -> fR.set(-0.3)),
+                                new InstantCommand(() -> fR.set(0.3)),
                                 new InstantCommand(() -> bR.set(0.3))
                         )).andThen(
                                 new WaitCommand(700))
@@ -58,7 +58,7 @@ public class RedRightAuton extends CommandOpMode {
                         ).andThen(new ParallelCommandGroup(
                                 new InstantCommand(() -> fL.set(-0.3)),
                                 new InstantCommand(() -> bL.set(-0.3)),
-                                new InstantCommand(() -> fR.set(-0.3)),
+                                new InstantCommand(() -> fR.set(0.3)),
                                 new InstantCommand(() -> bR.set(-0.3))
                         )).andThen(
 
@@ -68,34 +68,34 @@ public class RedRightAuton extends CommandOpMode {
                                 new InstantCommand(() -> bL.stopMotor()) ,
                                 new InstantCommand(() -> fR.stopMotor()),
                                 new InstantCommand(() -> bR.stopMotor())
-                        )).andThen(new ParallelCommandGroup(
-                                new InstantCommand(() -> fL.set(-0.3)),
-                                new InstantCommand(() -> bL.set(0.3)),
-                                new InstantCommand(() -> fR.set(0.3)),
-                                new InstantCommand(() -> bR.set(-0.3))
-                        )).andThen(
-                                new WaitCommand(800))
-
-                        .andThen(new ParallelCommandGroup(
-                                new InstantCommand(() -> fL.stopMotor()),
-                                new InstantCommand(() -> bL.stopMotor()) ,
-                                new InstantCommand(() -> fR.stopMotor()),
-                                new InstantCommand(() -> bR.stopMotor())
-
-                                        .andThen(new ParallelCommandGroup(
-                                        new InstantCommand(() -> fL.set(-0.3)),
-                                        new InstantCommand(() -> bL.set(-0.3)),
-                                        new InstantCommand(() -> fR.set(-0.3)),
-                                        new InstantCommand(() -> bR.set(-0.3))
-                                )).andThen(
-
-                                        new WaitCommand(650))
-
-                                        .andThen(new ParallelCommandGroup(
-                                                new InstantCommand(() -> fL.stopMotor()),
-                                                new InstantCommand(() -> bL.stopMotor()) ,
-                                                new InstantCommand(() -> fR.stopMotor()),
-                                                new InstantCommand(() -> bR.stopMotor()))))));
+                        )));//.andThen(new ParallelCommandGroup(
+//                                new InstantCommand(() -> fL.set(-0.3)),
+//                                new InstantCommand(() -> bL.set(0.3)),
+//                                new InstantCommand(() -> fR.set(-0.3)),
+//                                new InstantCommand(() -> bR.set(-0.3))
+//                        )).andThen(
+//                                new WaitCommand(800))
+//
+//                        .andThen(new ParallelCommandGroup(
+//                                new InstantCommand(() -> fL.stopMotor()),
+//                                new InstantCommand(() -> bL.stopMotor()) ,
+//                                new InstantCommand(() -> fR.stopMotor()),
+//                                new InstantCommand(() -> bR.stopMotor())
+//
+//                                        .andThen(new ParallelCommandGroup(
+//                                                new InstantCommand(() -> fL.set(0.3)),
+//                                                new InstantCommand(() -> bL.set(0.3)),
+//                                                new InstantCommand(() -> fR.set(-0.3)),
+//                                                new InstantCommand(() -> bR.set(0.3))
+//                                        )).andThen(
+//
+//                                                new WaitCommand(750))
+//
+//                                        .andThen(new ParallelCommandGroup(
+//                                                new InstantCommand(() -> fL.stopMotor()),
+//                                                new InstantCommand(() -> bL.stopMotor()) ,
+//                                                new InstantCommand(() -> fR.stopMotor()),
+//                                                new InstantCommand(() -> bR.stopMotor()))))));
 
 
     }

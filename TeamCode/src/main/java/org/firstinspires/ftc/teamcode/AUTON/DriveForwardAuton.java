@@ -10,7 +10,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
-@Autonomous(name = "ParkingAuton")
+@Autonomous(name = "JustForwardAuton")
 public class DriveForwardAuton extends CommandOpMode {
 
     private Motor fL, bL, fR, bR;
@@ -31,7 +31,7 @@ public class DriveForwardAuton extends CommandOpMode {
                 .andThen(new ParallelCommandGroup(
                     new InstantCommand(() -> fL.set(-0.3)),
                     new InstantCommand(() -> bL.set(0.3)),
-                    new InstantCommand(() -> fR.set(0.3)),
+                    new InstantCommand(() -> fR.set(-0.3)),
                     new InstantCommand(() -> bR.set(-0.3))
                 )).andThen(
                     new WaitCommand(1700))
@@ -45,7 +45,7 @@ public class DriveForwardAuton extends CommandOpMode {
                     .andThen(new ParallelCommandGroup(
                             new InstantCommand(() -> fL.set(0.3)),
                             new InstantCommand(() -> bL.set(-0.3)),
-                            new InstantCommand(() -> fR.set(-0.3)),
+                            new InstantCommand(() -> fR.set(0.3)),
                             new InstantCommand(() -> bR.set(0.3))
                     )).andThen(
                             new WaitCommand(500))
