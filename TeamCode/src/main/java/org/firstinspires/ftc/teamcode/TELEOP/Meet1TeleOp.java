@@ -115,6 +115,7 @@ public class Meet1TeleOp extends CommandOpMode {
 
         schedule(new RunCommand(() -> {
             telemetry.addData("AirplaneSERVOANLE", airServo.getAngle());
+            telemetry.addData("AirplaneSERVOANLE", intakeServo.getAngle());
             telemetry.update();
         }));
     }

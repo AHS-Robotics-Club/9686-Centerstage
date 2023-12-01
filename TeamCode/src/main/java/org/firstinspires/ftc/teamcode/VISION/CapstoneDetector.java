@@ -1,4 +1,4 @@
-/*package org.firstinspires.ftc.teamcode.VISION;
+package org.firstinspires.ftc.teamcode.VISION;
 
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.util.RobotLog;
@@ -86,8 +86,9 @@ public class CapstoneDetector {
         RIGHT,
         CENTER
     }
-
 }
 
+//i.love.dick
+//i.love.lalalalala
+//i.love.saranya
 
- */
