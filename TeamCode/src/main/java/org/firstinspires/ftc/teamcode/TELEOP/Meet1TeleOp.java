@@ -27,7 +27,9 @@ public class Meet1TeleOp extends CommandOpMode {
 
     private SimpleServo airServo;
 
-    private SimpleServo intakeServo;
+    private SimpleServo container;
+
+    private SimpleServo hook;
 
     private TestSubsystem system;
 
@@ -53,7 +55,8 @@ public class Meet1TeleOp extends CommandOpMode {
 
 
         airServo = new SimpleServo(hardwareMap, "air",-180,180);
-        intakeServo = new SimpleServo(hardwareMap, "intakeServo",-180,180);
+        container = new SimpleServo(hardwareMap, "container",-180,180);
+        hook = new SimpleServo(hardwareMap, "intakeServo",-180,180);
 
         gPad1 = new GamepadEx(gamepad1);
 
@@ -102,23 +105,29 @@ public class Meet1TeleOp extends CommandOpMode {
                         new InstantCommand(() -> airServo.setPosition(0))
                                 .andThen(new InstantCommand(() -> airServo.setPosition(1))));
 
+        gPad1.getGamepadButton(GamepadKeys.Button.Y).whenPressed
+                (
+                        new InstantCommand(() -> hook.setPosition(0))
+                                .andThen(new InstantCommand(() -> hook.setPosition(1))));
+
         gPad1.getGamepadButton(GamepadKeys.Button.DPAD_RIGHT).whenPressed
                 (
-                        new InstantCommand(() -> airServo.setPosition(0)));
+                        new InstantCommand(() -> container.setPosition(0)));
 
         gPad1.getGamepadButton(GamepadKeys.Button.DPAD_LEFT).whenPressed
                 (
-                        new InstantCommand(() -> airServo.setPosition(1)));
+                        new InstantCommand(() -> container.setPosition(1)));
 
         register(system);
         system.setDefaultCommand(command);
 
         schedule(new RunCommand(() -> {
             telemetry.addData("AirplaneSERVOANLE", airServo.getAngle());
-            telemetry.addData("AirplaneSERVOANLE", intakeServo.getAngle());
+            telemetry.addData("AirplaneSERVOANLE", container.getAngle());
             telemetry.update();
         }));
     }
 }
+
 
 
