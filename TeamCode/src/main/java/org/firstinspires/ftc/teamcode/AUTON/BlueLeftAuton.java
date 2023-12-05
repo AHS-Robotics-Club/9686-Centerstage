@@ -29,26 +29,12 @@ public class BlueLeftAuton extends CommandOpMode {
         schedule(
                 new WaitUntilCommand(this::isStarted)
                         .andThen(new ParallelCommandGroup(
-                                new InstantCommand(() -> fL.set(-0.3)),
-                                new InstantCommand(() -> bL.set(0.3)),
-                                new InstantCommand(() -> fR.set(-0.3)),
-                                new InstantCommand(() -> bR.set(-0.3))
-                        )).andThen(
-                                new WaitCommand(1700))
-                        .andThen(new ParallelCommandGroup(
-                                        new InstantCommand(() -> fL.stopMotor()),
-                                        new InstantCommand(() -> bL.stopMotor()) ,
-                                        new InstantCommand(() -> fR.stopMotor()),
-                                        new InstantCommand(() -> bR.stopMotor())
-                                )
-                        )
-                        .andThen(new ParallelCommandGroup(
                                 new InstantCommand(() -> fL.set(0.3)),
-                                new InstantCommand(() -> bL.set(-0.3)),
+                                new InstantCommand(() -> bL.set(0.3)),
                                 new InstantCommand(() -> fR.set(0.3)),
                                 new InstantCommand(() -> bR.set(0.3))
                         )).andThen(
-                                new WaitCommand(700))
+                                new WaitCommand(3000))
                         .andThen(new ParallelCommandGroup(
                                         new InstantCommand(() -> fL.stopMotor()),
                                         new InstantCommand(() -> bL.stopMotor()) ,
@@ -58,7 +44,7 @@ public class BlueLeftAuton extends CommandOpMode {
                         ).andThen(new ParallelCommandGroup(
                                 new InstantCommand(() -> fL.set(0.3)),
                                 new InstantCommand(() -> bL.set(0.3)),
-                                new InstantCommand(() -> fR.set(-0.3)),
+                                new InstantCommand(() -> fR.set(0.3)),
                                 new InstantCommand(() -> bR.set(0.3))
                         )).andThen(
 

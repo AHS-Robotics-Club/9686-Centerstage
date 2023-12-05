@@ -10,7 +10,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
-@Autonomous(name = "ReddRight")
+@Autonomous(name = "RedRight")
 public class RedRightAuton extends CommandOpMode {
 
     private Motor fL, bL, fR, bR;
@@ -30,25 +30,11 @@ public class RedRightAuton extends CommandOpMode {
                 new WaitUntilCommand(this::isStarted)
                         .andThen(new ParallelCommandGroup(
                                 new InstantCommand(() -> fL.set(-0.3)),
-                                new InstantCommand(() -> bL.set(0.3)),
+                                new InstantCommand(() -> bL.set(-0.3)),
                                 new InstantCommand(() -> fR.set(-0.3)),
                                 new InstantCommand(() -> bR.set(-0.3))
                         )).andThen(
-                                new WaitCommand(1700))
-                        .andThen(new ParallelCommandGroup(
-                                        new InstantCommand(() -> fL.stopMotor()),
-                                        new InstantCommand(() -> bL.stopMotor()) ,
-                                        new InstantCommand(() -> fR.stopMotor()),
-                                        new InstantCommand(() -> bR.stopMotor())
-                                )
-                        )
-                        .andThen(new ParallelCommandGroup(
-                                new InstantCommand(() -> fL.set(0.3)),
-                                new InstantCommand(() -> bL.set(-0.3)),
-                                new InstantCommand(() -> fR.set(0.3)),
-                                new InstantCommand(() -> bR.set(0.3))
-                        )).andThen(
-                                new WaitCommand(700))
+                                new WaitCommand(3000))
                         .andThen(new ParallelCommandGroup(
                                         new InstantCommand(() -> fL.stopMotor()),
                                         new InstantCommand(() -> bL.stopMotor()) ,
@@ -58,10 +44,9 @@ public class RedRightAuton extends CommandOpMode {
                         ).andThen(new ParallelCommandGroup(
                                 new InstantCommand(() -> fL.set(-0.3)),
                                 new InstantCommand(() -> bL.set(-0.3)),
-                                new InstantCommand(() -> fR.set(0.3)),
+                                new InstantCommand(() -> fR.set(-0.3)),
                                 new InstantCommand(() -> bR.set(-0.3))
                         )).andThen(
-
                                 new WaitCommand(3000))
                         .andThen(new ParallelCommandGroup(
                                 new InstantCommand(() -> fL.stopMotor()),

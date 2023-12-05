@@ -30,7 +30,7 @@ public class DriveForwardAuton extends CommandOpMode {
             new WaitUntilCommand(this::isStarted)
                 .andThen(new ParallelCommandGroup(
                     new InstantCommand(() -> fL.set(-0.3)),
-                    new InstantCommand(() -> bL.set(0.3)),
+                    new InstantCommand(() -> bL.set(-0.3)),
                     new InstantCommand(() -> fR.set(-0.3)),
                     new InstantCommand(() -> bR.set(-0.3))
                 )).andThen(
@@ -44,7 +44,7 @@ public class DriveForwardAuton extends CommandOpMode {
                 )
                     .andThen(new ParallelCommandGroup(
                             new InstantCommand(() -> fL.set(0.3)),
-                            new InstantCommand(() -> bL.set(-0.3)),
+                            new InstantCommand(() -> bL.set(0.3)),
                             new InstantCommand(() -> fR.set(0.3)),
                             new InstantCommand(() -> bR.set(0.3))
                     )).andThen(

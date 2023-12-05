@@ -57,10 +57,9 @@ public class Meet1TeleOp extends CommandOpMode {
         airServo = new SimpleServo(hardwareMap, "air",-180,180);
         container = new SimpleServo(hardwareMap, "container",-180,180);
         hook = new SimpleServo(hardwareMap, "intakeServo",-180,180);
+        container.setInverted(false);
 
         gPad1 = new GamepadEx(gamepad1);
-
-        frontRight.motor.setDirection(DcMotor.Direction.REVERSE);
 
 
         frontLeft.setZeroPowerBehavior(Motor.ZeroPowerBehavior.BRAKE);
@@ -93,8 +92,8 @@ public class Meet1TeleOp extends CommandOpMode {
         gPad1.getGamepadButton(GamepadKeys.Button.DPAD_UP).whenHeld(new StartEndCommand(() -> actuator.set(1), () -> actuator.stopMotor()));
         gPad1.getGamepadButton(GamepadKeys.Button.DPAD_DOWN).whenHeld(new StartEndCommand(() -> actuator.set(-1), () -> actuator.stopMotor()));
 
-        gPad1.getGamepadButton(GamepadKeys.Button.RIGHT_BUMPER).whenHeld(new StartEndCommand(() -> bar.set(0.35), () -> bar.stopMotor()));
-        gPad1.getGamepadButton(GamepadKeys.Button.LEFT_BUMPER).whenHeld(new StartEndCommand(() -> bar.set(-0.35), () -> bar.stopMotor()));
+        gPad1.getGamepadButton(GamepadKeys.Button.RIGHT_BUMPER).whenHeld(new StartEndCommand(() -> bar.set(0.5), () -> bar.stopMotor()));
+        gPad1.getGamepadButton(GamepadKeys.Button.LEFT_BUMPER).whenHeld(new StartEndCommand(() -> bar.set(-0.5), () -> bar.stopMotor()));
 
         gPad1.getGamepadButton(GamepadKeys.Button.A).whenHeld(new StartEndCommand(() -> intake.set(1), () -> intake.stopMotor()));
         gPad1.getGamepadButton(GamepadKeys.Button.X).whenHeld(new StartEndCommand(() -> intake.set(-1), () -> intake.stopMotor()));
@@ -105,18 +104,17 @@ public class Meet1TeleOp extends CommandOpMode {
                         new InstantCommand(() -> airServo.setPosition(0))
                                 .andThen(new InstantCommand(() -> airServo.setPosition(1))));
 
-        gPad1.getGamepadButton(GamepadKeys.Button.Y).whenPressed
+        gPad1.getGamepadButton(GamepadKeys.Button.Y).toggleWhenPressed
                 (
-                        new InstantCommand(() -> hook.setPosition(0))
-                                .andThen(new InstantCommand(() -> hook.setPosition(1))));
+                        new InstantCommand(() -> hook.turnToAngle(-160)),
+                        new InstantCommand(() -> hook.turnToAngle(-120))
+                );
 
-        gPad1.getGamepadButton(GamepadKeys.Button.DPAD_RIGHT).whenPressed
+        gPad1.getGamepadButton(GamepadKeys.Button.DPAD_RIGHT).toggleWhenPressed
                 (
-                        new InstantCommand(() -> container.setPosition(0)));
-
-        gPad1.getGamepadButton(GamepadKeys.Button.DPAD_LEFT).whenPressed
-                (
-                        new InstantCommand(() -> container.setPosition(1)));
+                        new InstantCommand(() -> container.turnToAngle(45)),
+                        new InstantCommand(() -> container.turnToAngle(-135))
+                );
 
         register(system);
         system.setDefaultCommand(command);
